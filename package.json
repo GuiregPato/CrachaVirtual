@@ -1,0 +1,23 @@
+{
+  "name": "crachavirtual",
+  "version": "1.0.0",
+  "description": "Projeto CrachaVir",
+  "main": "index.ts",
+  "scripts": {
+    "test": "start index.ts",
+    "dev": "tsx watch index.ts"
+  },
+  "author": "Guilherme Scheffer",
+  "license": "ISC",
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.18",
+    "@types/node": "^20.8.4",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.0",
+    "nodemon": "^3.0.1",
+    "tsx": "^3.13.0",
+    "typescript": "^5.2.2"
+  }
+}
