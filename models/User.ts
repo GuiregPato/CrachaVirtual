@@ -1,20 +1,20 @@
-import mongoose, { Schema } from "mongoose";
+import { Schema, model, Document } from 'mongoose';
 import { StringLiteral } from "typescript";
 
-interface CUser {
+interface User {
   name: string;
   lastname: string;
-  adress: String;
+  adress: string;
   age: number;
 }
-
-const usuarioSchema = new Schema<CUser>({
+interface Userdocment  extends User, Document {}
+const usuarioSchema = new Schema<Userdocment>({
   name: { type: String, required: true },
   lastname: { type: String, required: true },
   adress: { type: String, required: true },
   age:{type: Number, required: true}
 });
 
-const Usuario = mongoose.model('Usuario', usuarioSchema)
+const Usuario = model<Userdocment>('User', usuarioSchema)
 
 export default  Usuario
