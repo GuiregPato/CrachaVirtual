@@ -5,6 +5,12 @@ const router = express.Router();
 
 router.post("/send", async (req: Request, res: Response) => {
   const { name, lastname, adress, age } = req.body;
+
+  if (!name || !lastname || !adress || !age) {
+    return res.status(400).send('Nome, sobrenome, endereço e idade são obrigatórios.');
+  }
+
+
   try { 
     const userService = new UserService();
     const newUser = await userService.createUser(name, lastname, adress, age);
