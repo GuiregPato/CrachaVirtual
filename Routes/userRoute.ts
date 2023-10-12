@@ -1,18 +1,13 @@
 import express, { Request, Response } from "express";
 import Usuario from "../models/User";
+import UserService from "../models/id";
 const router = express.Router();
 
 router.post("/send", async (req: Request, res: Response) => {
   const { name, lastname, adress, age } = req.body;
-  const user = {
-    name,
-    lastname,
-    adress,
-    age,
-  };
-
-  try {
-    await Usuario.create(user);
+  try { 
+    const userService = new UserService();
+    const newUser = await userService.createUser(name, lastname, adress, age);
     res.status(201).json({ message: "Usuario inserido no sistema" });
   } catch (error) {
     res.status(500).json({ message: "Usuario não inserido", error });
