@@ -8,7 +8,7 @@ app.use(express.json());
 app.use('/',router);
 
 // rota inicial / endpoint
-app.get("/", (req: Request, res: Response) => {
+app.get("/home", (req: Request, res: Response) => {
   // mostrar req
   res.json({ message: "Express online!" });
 }); 
