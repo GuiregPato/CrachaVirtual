@@ -4,7 +4,6 @@
   "description": "Projeto CrachaVir",
   "main": "index.ts",
   "scripts": {
-    "test": "start index.ts",
     "dev": "tsx watch index.ts"
   },
   "author": "Guilherme Scheffer",
@@ -15,7 +14,9 @@
     "@types/node": "^20.8.4",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.6.0",
     "nodemon": "^3.0.1",
     "tsx": "^3.13.0",

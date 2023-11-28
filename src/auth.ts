@@ -7,7 +7,7 @@ const data = {
     role: 'Adm'
 }
 
-function generateToken(data: { id: number; username: string;}) {
+function generateToken(data: { id: number, username: String}) {
   return jwt.sign(data, secretKey, { expiresIn: "1h" });
 }
 

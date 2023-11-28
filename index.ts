@@ -1,25 +1,27 @@
 import express, { Request, Response } from "express";
 const mongoose = require("mongoose");
-import  conectar  from "./database/db";
+import conectar from "./database/db";
 const app = express();
 import router from "./Routes/userRoute";
+import path from "path";
 //Rotas da API
 app.use(express.json());
-app.use('/',router);
-
+app.use(router);
 // rota inicial / endpoint
-app.get("/home", (req: Request, res: Response) => {
+app.get("/", (req, res) => {
   // mostrar req
   res.json({ message: "Express online!" });
-}); 
+});
+const port = 3000;
 
 // Ler JSON / middlewares
+app.set('views', './View');
+app.set("view engine", "ejs");
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
 
 conectar();
 
-const port = 3000;
-app.set("view enginem", "ejs");
 app.listen(port, () =>
   console.log(`Servidor rodando em http://localhost:${port}`)
 );
