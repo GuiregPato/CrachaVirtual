@@ -38,7 +38,7 @@ function checkToken(req: Request, res: Response, next: NextFunction) {
 }
 //Cadastrar Usuario
 router.post("/cadastro", async (req, res) => {
-  const { name, lastname, adress, age, email, password } = req.body;
+  const { name, lastname, address, age, email, password } = req.body;
 
   //Checa se todos os campos estão preenchidos
   if (!name) {
@@ -47,7 +47,7 @@ router.post("/cadastro", async (req, res) => {
   if (!lastname) {
     return res.status(500).json({ message: "Preencha sobre!" });
   }
-  if (!adress ) {
+  if (!address ) {
     return res.status(500).json({ message: "Preencha ender!" });
   }
   if (!age) {
@@ -71,9 +71,9 @@ router.post("/cadastro", async (req, res) => {
   const passHash = await bcrypt.hash(password, salt);
 
   try {
-    const user = { name, lastname, adress, age, email, password: passHash };
+    const user = { name, lastname, address, age, email, password: passHash };
     await Usuario.create(user);
-    res.status(201).json({ message: "Usuario inserido no sistema" });
+    res.redirect('/login')
   } catch (error) {
     res.status(500).json({ message: "Usuario não inserido", error });
   }
@@ -157,11 +157,11 @@ router.delete("/:id", async (req, res) => {
 
 router.patch("/:id", async (req, res) => {
   const id = req.params.id;
-  const { name, lastname, adress, age } = req.body;
+  const { name, lastname, address, age } = req.body;
   const User = {
     name,
     lastname,
-    adress,
+    address,
     age,
   };
   if (User) {

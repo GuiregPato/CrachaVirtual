@@ -6,7 +6,7 @@ import router from "./Routes/userRoute";
 import path from "path";
 //Rotas da API
 app.use(express.json());
-app.use(router);
+
 // rota inicial / endpoint
 app.get("/", (req, res) => {
   // mostrar req
@@ -19,7 +19,7 @@ app.set('views', './View');
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded());
-
+app.use(router);
 conectar();
 
 app.listen(port, () =>
