@@ -1,7 +1,7 @@
 import express, { Request, Response, Router, NextFunction } from "express";
+import Usuario from "../models/User";
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-import Usuario from "../models/User";
 const router = Router();
 require("dotenv").config();
 
@@ -41,23 +41,8 @@ router.post("/cadastro", async (req, res) => {
   const { name, lastname, address, age, email, password } = req.body;
 
   //Checa se todos os campos estão preenchidos
-  if (!name) {
-    return res.status(500).json({ message: "Preencha nome" });
-  }
-  if (!lastname) {
-    return res.status(500).json({ message: "Preencha sobre!" });
-  }
-  if (!address ) {
-    return res.status(500).json({ message: "Preencha ender!" });
-  }
-  if (!age) {
-    return res.status(500).json({ message: "Preencha idade "});
-  }
-  if (!email) {
-    return res.status(500).json({ message: "Preencha emaiol" });
-  }
-  if (!password) {
-    return res.status(500).json({ message: "Preencha senh" });
+  if (!name || !lastname || !address || !age || !email || !password) {
+    return res.status(500).json({ message: "Preencha todos os campos!" });
   }
 
   //Checar se usuario existe
@@ -73,14 +58,14 @@ router.post("/cadastro", async (req, res) => {
   try {
     const user = { name, lastname, address, age, email, password: passHash };
     await Usuario.create(user);
-    res.redirect('/login')
+    res.redirect('/')
   } catch (error) {
     res.status(500).json({ message: "Usuario não inserido", error });
   }
 });
 
 //Logar Usuario
-router.post("/login", async (req, res) => {
+router.post("/user/login", async (req, res) => {
   const { email, password } = req.body;
 
   //Validações
@@ -105,7 +90,7 @@ router.post("/login", async (req, res) => {
         id: user._id,
       },
       secret
-    );
+    )
     res.status(200).json({ ms: "Autenticado com sucesso!", token });
   } catch (error) {
     console.log(error);
@@ -148,7 +133,7 @@ router.delete("/:id", async (req, res) => {
       return;
     }
     res.status(200).json(users);
-  } catch (error) {
+  } catch (error) { 
     res.status(500).json({ message: "Usario não encontrado" });
   }
 });
@@ -174,9 +159,5 @@ router.patch("/:id", async (req, res) => {
       res.status(422).json({ message: "Usario não encontrado" });
     }
   }
-});
-
-router.get("/cadastrar", (req, res) => {
-  res.render("index");
 });
 export default router;
