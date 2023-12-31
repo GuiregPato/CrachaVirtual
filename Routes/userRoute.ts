@@ -19,8 +19,8 @@ router.get("/user/:id", checkToken, async (req, res) => {
   res.status(200).json({ user });
 });
 
-function checkToken(req: Request, res: Response, next: NextFunction) {
-  const authHeader = req.headers["authorization"];
+export function checkToken(req: Request, res: Response, next: NextFunction) {
+  const authHeader = req.headers ['authorization']
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {
@@ -41,7 +41,7 @@ router.post("/cadastro", async (req, res) => {
   const { name, lastname, address, age, email, password } = req.body;
 
   //Checa se todos os campos estão preenchidos
-  if (!name || !lastname || !address || !age || !email || !password) {
+  if (!name || !lastname || !email || !password) {
     return res.status(500).json({ message: "Preencha todos os campos!" });
   }
 
@@ -91,7 +91,8 @@ router.post("/user/login", async (req, res) => {
       },
       secret
     )
-    res.status(200).json({ ms: "Autenticado com sucesso!", token });
+   //res.status(200).json({ ms: "Autenticado com sucesso!", token });
+   res.redirect('/cracha')
   } catch (error) {
     console.log(error);
     return res.status(500).json({ Server: "Aconteceu um erro" });

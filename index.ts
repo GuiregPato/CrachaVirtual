@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import conectar from "./database/db";
 import router from "./Routes/userRoute";
 import path from "path";
+import checkToken from "./Routes/userRoute"
 const app = express();
 const port = 3000;
 
@@ -13,6 +14,9 @@ app.get("/", (req, res) => {
 app.set('views', './View');
 app.get('/cadastrar', (req, res) => {
   res.render('index')
+})
+app.get('/cracha',checkToken, (req:Request,res:Response) =>{
+  res.render('cracha')
 })
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
