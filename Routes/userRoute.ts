@@ -6,7 +6,7 @@ const router = Router();
 require("dotenv").config();
 
 router.use(express.json());
-//Rota privada
+//Rota priva
 router.get("/user/:id", checkToken, async (req, res) => {
   const id = req.params.id;
 
